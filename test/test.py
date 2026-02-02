@@ -41,7 +41,7 @@ async def test_project(dut):
     # Current state is 0, next should be 3, 2, 1, 0
     expected_values = [0, 3, 2, 1, 0, 3]
     for val in expected_values:
-        out = dut.uo_out
+        await ClockCycles(dut.clk, 1)
         actual_val = dut.uo_out.value.to_unsigned() & 0x03
         #assert actual_val == val
         dut._log.info(f"Down Count: {actual_val}")
